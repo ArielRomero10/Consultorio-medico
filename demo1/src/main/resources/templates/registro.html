@@ -13,7 +13,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0; /* Para quitar margen predeterminado */
+      margin: 0;
     }
     .registro-container {
       padding: 40px;
@@ -22,19 +22,19 @@
       background-color: white;
       max-width: 600px;
       width: 100%;
-      margin: auto; /* Para centrar horizontalmente */
+      margin: auto;
     }
     h2 {
-      color: #28a745; /* Verde para el registro de turnos */
+      color: #007bff;
       margin-bottom: 30px;
     }
     .btn-primary {
-      background-color: #28a745; /* Color verde */
-      border-color: #28a745;
+      background-color: #007bff;
+      border-color: #007bff;
     }
     .btn-primary:hover {
-      background-color: #218838;
-      border-color: #218838;
+      background-color: #0056b3;
+      border-color: #0056b3;
     }
   </style>
 </head>
@@ -42,7 +42,11 @@
 <div class="container">
   <div class="registro-container">
     <h2 class="text-center">Registro de Turnos</h2>
-    <form action="#" method="post">
+
+    <!-- Mensaje de éxito -->
+    <div th:if="${mensaje}" class="alert alert-success" th:text="${mensaje}" role="alert"></div>
+
+    <form action="/turnos/guardar" method="post">
       <div class="form-group">
         <label for="paciente">Nombre del Paciente</label>
         <input type="text" class="form-control" id="paciente" name="paciente" required>
@@ -56,12 +60,12 @@
         <input type="time" class="form-control" id="hora" name="hora" required>
       </div>
       <div class="form-group">
-        <label for="medico">Nombre del Médico</label>
-        <input type="text" class="form-control" id="medico" name="medico" required>
-      </div>
-      <div class="form-group">
         <label for="comentarios">Comentarios</label>
         <textarea class="form-control" id="comentarios" name="comentarios" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="obraSocial">Obra Social</label>
+        <input type="text" class="form-control" id="obraSocial" name="obraSocial" required placeholder="Ingrese el nombre de la obra social">
       </div>
       <button type="submit" class="btn btn-primary btn-block">Registrar Turno</button>
     </form>
