@@ -42,9 +42,9 @@ public class TurnoController {
         return "redirect:/turnos/lista";
     }
 
-    @GetMapping("/lista")
-    public String listarTurnos(Model model) {
-        model.addAttribute("turnos", turnoRepository.findAll());
-        return "lista-turnos";
+    @GetMapping("/turnos")
+    public String mostrarTurnos(Model model) {
+        // Agrega lógica para llenar el modelo si es necesario
+        return "turnos"; // Asegúrate de que este nombre coincida con tu archivo HTML
     }
 }
