@@ -4,25 +4,74 @@
  */
 package com.example.demo1.Model;
 
-import com.example.demo1.Model.Paciente;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import org.springframework.data.annotation.Id;
 
 @Entity
 public class Turno {
+
+    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate fecha;
-    private LocalTime hora;
 
-    @ManyToOne
-    private Paciente paciente;
+    private String paciente;
+    private String fecha;
+    private String hora;
+    private String comentarios;
+    private String obraSocial;
 
     // Getters y Setters
+
+    public String getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(String paciente) {
+        this.paciente = paciente;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+
+    }
+    public void setObraSocial(String obrasocial) {
+        this.obraSocial = obrasocial;
+
+    }
+    public String getObraSocial() {
+        return obraSocial;
+
+    }
 }

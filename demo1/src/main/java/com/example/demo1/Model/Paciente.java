@@ -17,7 +17,7 @@ import jakarta.persistence.Id;
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+
     private String nombre;
     private String apellido;
     private String obraSocial;
@@ -25,20 +25,13 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(Long id, String nombre, String apellido, String obraSocial) {
-        this.id = id;
+    public Paciente(String nombre, String apellido, String obraSocial) {
+
         this.nombre = nombre;
         this.apellido = apellido;
         this.obraSocial = obraSocial;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -64,5 +57,5 @@ public class Paciente {
         this.obraSocial = obraSocial;
     }
 
-    
+
 }
