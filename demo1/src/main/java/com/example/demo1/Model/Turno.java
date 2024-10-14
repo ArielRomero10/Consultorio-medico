@@ -23,8 +23,26 @@ public class Turno {
     private String hora;
     private String comentarios;
     private String obraSocial;
+    private String nombrePaciente; // Almacena directamente el nombre del paciente
+    private String apellidoPaciente;
 
     // Getters y Setters
+
+    public String getNombrePaciente() {
+        return nombrePaciente;
+    }
+
+    public void setNombrePaciente(String nombrePaciente) {
+        this.nombrePaciente = nombrePaciente;
+    }
+
+    public String getApellidoPaciente() {
+        return apellidoPaciente;
+    }
+
+    public void setApellidoPaciente(String apellidoPaciente) {
+        this.apellidoPaciente = apellidoPaciente;
+    }
 
     public String getPaciente() {
         return paciente;
