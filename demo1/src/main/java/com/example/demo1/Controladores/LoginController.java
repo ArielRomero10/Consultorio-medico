@@ -22,7 +22,7 @@ public class LoginController {
     // Método GET para mostrar el formulario de login
     @GetMapping("/login")
     public String login() {
-        return "login";  // Devuelve la vista del formulario de login
+        return "Login";  // Devuelve la vista del formulario de login
     }
 
     // Método POST para procesar el formulario de login
