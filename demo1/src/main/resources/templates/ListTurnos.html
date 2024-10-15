@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!DOCTYPE html>
+  <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Lista de Turnos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+  <body>
+  <div class="container">
+    <h1>Lista de Turnos</h1>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>ID</th> <!-- ID del Turno -->
+        <th>Paciente</th> <!-- Nombre y Apellido del Paciente -->
+        <th>Fecha</th>
+        <th>Hora</th>
+        <th>Obra Social</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="turno : ${turnos}">
+        <td th:text="${turno.id}"></td> <!-- ID del Turno -->
+        <td th:text="${turno.paciente}"></td>
+        <td th:text="${turno.fecha}"></td>
+        <td th:text="${turno.hora}"></td>
+        <td th:text="${turno.obraSocial}"></td>
+        <td th:text="${turno.comentarios}"></td>
+        <td>
+          <a th:href="@{/turnos/editar/{id}(id=${turno.id})}" class="btn btn-primary">Editar</a>
+          <a th:href="@{/turnos/eliminar/{id}(id=${turno.id})}" class="btn btn-danger" th:onclick="'return confirm(\'¿Estás seguro de eliminar este turno?\');'">Eliminar</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    </tbody>
+    </table>
+
+    <a href="@{/turnos/nuevo}" class="btn btn-success">Nuevo Turno</a>
+  </div>
+  </body>
+  </html>

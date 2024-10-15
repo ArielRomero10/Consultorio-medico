@@ -1,50 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.demo1.Controladores;
 
-// TurnoController.java
-
-
 import org.springframework.ui.Model;
-
-import com.example.demo1.Repository.PacienteRepository;
 import com.example.demo1.Repository.TurnoRepository;
 import com.example.demo1.Model.Turno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/turnos")
 public class TurnoController {
-    
-    @Autowired
-    private PacienteRepository pacienteRepository;
-    
+
     @Autowired
     private TurnoRepository turnoRepository;
 
     @GetMapping("/nuevo")
     public String nuevoTurno(Model model) {
-        model.addAttribute("turno", new Turno());
-        model.addAttribute("pacientes", pacienteRepository.findAll());
-        return "nuevo-turno";
+        model.addAttribute("turno", new Turno()); // Crear un nuevo objeto Turno
+        return "registro"; // Vista para crear un nuevo turno
     }
 
     @PostMapping("/guardar")
-    public String guardarTurno(@ModelAttribute Turno turno) {
+    public String guardarTurno(@ModelAttribute Turno turno, RedirectAttributes redirectAttributes) {
         turnoRepository.save(turno);
-        return "redirect:/turnos/lista";
+        redirectAttributes.addFlashAttribute("mensaje", "El turno ha sido registrado exitosamente.");
+        return "redirect:/turnos/listar"; // Redirigir a la lista después de guardar
     }
 
-    @GetMapping("/lista")
+    @GetMapping("/listar")
     public String listarTurnos(Model model) {
-        model.addAttribute("turnos", turnoRepository.findAll());
-        return "lista-turnos";
+        List<Turno> turnos = turnoRepository.findAll(); // Obtener los turnos de la base de datos.
+        model.addAttribute("turnos", turnos); // Pasar la lista de turnos al modelo.
+        return "ListTurnos"; // Retornar el nombre de la vista (sin la extensión .html).
+    }
+
+    // Mostrar formulario para editar un turno
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioDeEditar(@PathVariable Long id, Model model) {
+        Turno turno = turnoRepository.findById(id).orElse(null);
+        if (turno == null) {
+            return "redirect:/turnos/listar"; // Redirigir si no se encuentra el turno
+        }
+        model.addAttribute("turno", turno);
+        return "registro"; // Mismo formulario para editar
+    }
+
+    // Actualizar turno
+    @PostMapping("/actualizar/{id}")
+    public String actualizarTurno(@PathVariable Long id, @ModelAttribute("turno") Turno turnoActualizado) {
+        Turno turnoExistente = turnoRepository.findById(id).orElse(null);
+        if (turnoExistente != null) {
+            turnoExistente.setNombrePaciente(turnoActualizado.getNombrePaciente());
+            turnoExistente.setFecha(turnoActualizado.getFecha());
+            turnoExistente.setHora(turnoActualizado.getHora());
+            turnoExistente.setComentarios(turnoActualizado.getComentarios());
+            turnoExistente.setObraSocial(turnoActualizado.getObraSocial());
+            turnoRepository.save(turnoExistente);
+        }
+        return "redirect:/turnos/listar"; // Redirigir a la lista después de actualizar
+    }
+
+    // Eliminar un turno
+    @GetMapping("/eliminar/{id}")
+    public String eliminarTurno(@PathVariable Long id) {
+        turnoRepository.deleteById(id);
+        return "redirect:/turnos/listar"; // Redirigir a la lista después de eliminar
     }
 }

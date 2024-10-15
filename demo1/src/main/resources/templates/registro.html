@@ -13,7 +13,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0; /* Para quitar margen predeterminado */
+      margin: 0;
     }
     .registro-container {
       padding: 40px;
@@ -22,51 +22,70 @@
       background-color: white;
       max-width: 600px;
       width: 100%;
-      margin: auto; /* Para centrar horizontalmente */
+      margin: auto;
     }
     h2 {
-      color: #28a745; /* Verde para el registro de turnos */
+      color: #007bff;
       margin-bottom: 30px;
     }
     .btn-primary {
-      background-color: #28a745; /* Color verde */
-      border-color: #28a745;
+      background-color: #007bff;
+      border-color: #007bff;
     }
     .btn-primary:hover {
-      background-color: #218838;
-      border-color: #218838;
+      background-color: #0056b3;
+      border-color: #0056b3;
     }
   </style>
 </head>
 <body>
+
 <div class="container">
   <div class="registro-container">
-    <h2 class="text-center">Registro de Turnos</h2>
-    <form action="#" method="post">
+    <!-- Cambiar el título según si es edición o creación -->
+    <h2 class="text-center" th:text="${turno.id == null ? 'Registrar Turno' : 'Editar Turno'}"></h2>
+
+    <div th:if="${mensaje}" class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong><i class="fas fa-check-circle"></i> ¡Éxito!</strong> <span th:text="${mensaje}"></span>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <!-- Modificar la acción del formulario según si es creación o edición -->
+    <form th:action="${turno.id == null ? '/turnos/guardar' : '/turnos/actualizar/' + turno.id}" th:object="${turno}" method="post">
       <div class="form-group">
         <label for="paciente">Nombre del Paciente</label>
-        <input type="text" class="form-control" id="paciente" name="paciente" required>
+        <input type="text" class="form-control" id="paciente" name="paciente" th:value="*{paciente}" required>
       </div>
       <div class="form-group">
         <label for="fecha">Fecha del Turno</label>
-        <input type="date" class="form-control" id="fecha" name="fecha" required>
+        <input type="date" class="form-control" id="fecha" name="fecha" th:value="*{fecha}" required>
       </div>
       <div class="form-group">
         <label for="hora">Hora del Turno</label>
-        <input type="time" class="form-control" id="hora" name="hora" required>
-      </div>
-      <div class="form-group">
-        <label for="medico">Nombre del Médico</label>
-        <input type="text" class="form-control" id="medico" name="medico" required>
+        <input type="time" class="form-control" id="hora" name="hora" th:value="*{hora}" required>
       </div>
       <div class="form-group">
         <label for="comentarios">Comentarios</label>
-        <textarea class="form-control" id="comentarios" name="comentarios" rows="3"></textarea>
+        <textarea class="form-control" id="comentarios" name="comentarios" rows="3" th:text="*{comentarios}"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary btn-block">Registrar Turno</button>
+      <div class="form-group">
+        <label for="obraSocial">Obra Social</label>
+        <input type="text" class="form-control" id="obraSocial" name="obraSocial" th:value="*{obraSocial}" required>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" th:text="${turno.id == null ? 'Registrar Turno' : 'Actualizar Turno'}"></button>
     </form>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
