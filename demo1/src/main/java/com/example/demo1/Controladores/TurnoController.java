@@ -4,8 +4,11 @@
  */
 package com.example.demo1.Controladores;
 
+// TurnoController.java
+
+
 import org.springframework.ui.Model;
-import com.example.demo1.Repository.PacienteRepository;
+
 import com.example.demo1.Repository.TurnoRepository;
 import com.example.demo1.Model.Turno;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/turnos")
 public class TurnoController {
-
-    @Autowired
-    private PacienteRepository pacienteRepository;
 
     @Autowired
     private TurnoRepository turnoRepository;
@@ -29,19 +31,23 @@ public class TurnoController {
     @GetMapping("/nuevo")
     public String nuevoTurno(Model model) {
         model.addAttribute("turno", new Turno()); // Crear un nuevo objeto Turno
-        model.addAttribute("pacientes", pacienteRepository.findAll()); // Cargar todos los pacientes
+        model.addAttribute("turnos  ", turnoRepository.findAll()); // Cargar todos los pacientes
         return "nuevo-turno"; // Vista para crear un nuevo turno
     }
 
     @PostMapping("/guardar")
-    public String guardarTurno(@ModelAttribute Turno turno, Model model, RedirectAttributes redirectAttributes) {
+    public String guardarTurno(@ModelAttribute Turno turno , RedirectAttributes redirectAttributes) {
         turnoRepository.save(turno);
-
-        // Mensaje de éxito
-        redirectAttributes.addFlashAttribute("mensaje", "Turno registrado con éxito.");
-
-        return "registro";  // Devuelve a la plantilla de registro
+        redirectAttributes.addFlashAttribute("mensaje", "El paciente ha sido registrado exitosamente."); // Mensaje de éxito
+        return "redirect:/registro";
     }
 
-    // Otros métodos...
+    @GetMapping("/listar")
+    public String listarTurnos(Model model) {
+        List<Turno> turnos = turnoRepository.findAll(); // Método para obtener los turnos de la base de datos.
+        model.addAttribute("turnos", turnos); // Pasar la lista de turnos al modelo.
+        return "ListTurnos"; // Retornar el nombre de la vista (sin la extensión .html).
+    }
+
+
 }
