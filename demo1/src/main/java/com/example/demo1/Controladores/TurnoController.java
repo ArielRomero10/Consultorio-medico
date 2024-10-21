@@ -1,5 +1,9 @@
 package com.example.demo1.Controladores;
 
+import com.example.demo1.Service.ExcelService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import com.example.demo1.Repository.TurnoRepository;
 import com.example.demo1.Model.Turno;
@@ -8,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -16,6 +22,8 @@ public class TurnoController {
 
     @Autowired
     private TurnoRepository turnoRepository;
+    @Autowired
+    private ExcelService excelService;
 
     @GetMapping("/nuevo")
     public String nuevoTurno(Model model) {
@@ -27,7 +35,7 @@ public class TurnoController {
     public String guardarTurno(@ModelAttribute Turno turno, RedirectAttributes redirectAttributes) {
         turnoRepository.save(turno);
         redirectAttributes.addFlashAttribute("mensaje", "El turno ha sido registrado exitosamente.");
-        return "redirect:/turnos/listar"; // Redirigir a la lista después de guardar
+        return "redirect:/turnos/nuevo"; // Redirigir a la lista después de guardar
     }
 
     @GetMapping("/listar")
@@ -69,4 +77,5 @@ public class TurnoController {
         turnoRepository.deleteById(id);
         return "redirect:/turnos/listar"; // Redirigir a la lista después de eliminar
     }
+
 }

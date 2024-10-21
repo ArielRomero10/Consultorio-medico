@@ -42,7 +42,11 @@
     </tbody>
     </table>
 
-    <a href="@{/turnos/nuevo}" class="btn btn-success">Nuevo Turno</a>
+    <script>
+      function exportToExcel() {
+          window.location.href = '/api/turnos/export'; // Ruta que has creado en el controlador
+      }
+    </script>
   </div>
   </body>
   </html>
