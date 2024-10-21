@@ -26,7 +26,7 @@
       <tbody>
       <tr th:each="turno : ${turnos}">
         <td th:text="${turno.id}"></td> <!-- ID del Turno -->
-        <td th:text="${turno.paciente}"></td>
+        <td th:text="${turno.nombrePaciente}"></td>
         <td th:text="${turno.fecha}"></td>
         <td th:text="${turno.hora}"></td>
         <td th:text="${turno.obraSocial}"></td>
@@ -42,11 +42,7 @@
     </tbody>
     </table>
 
-    <script>
-      function exportToExcel() {
-          window.location.href = '/api/turnos/export'; // Ruta que has creado en el controlador
-      }
-    </script>
+
   </div>
   </body>
   </html>
