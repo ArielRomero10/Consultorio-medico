@@ -28,6 +28,14 @@ public class Turno {
 
     // Getters y Setters
 
+    public String getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(String paciente) {
+        this.paciente = paciente;
+    }
+
     public String getNombrePaciente() {
         return nombrePaciente;
     }
@@ -44,13 +52,6 @@ public class Turno {
         this.apellidoPaciente = apellidoPaciente;
     }
 
-    public String getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(String paciente) {
-        this.paciente = paciente;
-    }
 
     public String getFecha() {
         return fecha;
