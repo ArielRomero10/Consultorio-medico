@@ -1,5 +1,8 @@
-DROP TABLE IF EXISTS "USUARIO";
-CREATE TABLE "USUARIO" (id BIGINT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(255), password VARCHAR(255));
+CREATE TABLE IF NOT EXISTS usuario (
+    password VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE
+);
 
-INSERT INTO USUARIO (username, password) VALUES ('user1', 'password1');
-INSERT INTO USUARIO (username, password) VALUES ('user2', 'password2');
+-- Inserta dos usuarios
+INSERT INTO usuario ( password, username) VALUES ( '321', 'Secre');
+INSERT INTO usuario ( password, username) VALUES ( '321', 'doctor');
