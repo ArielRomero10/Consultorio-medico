@@ -34,7 +34,11 @@ public class LoginController {
         if (usuario != null && usuario.getPassword().equals(password)) {
             // Redirigimos al usuario a una vista específica según su id
             if (usuario.getId() == 34) {
-                return "doctor";
+                return "doctor";}
+
+                if (usuario.getId() == 35) {
+                    return "ObraS";
+
             } else {
                 return "Principal";
             }
