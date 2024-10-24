@@ -6,6 +6,28 @@
   <head>
     <title>Lista de Turnos</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+
+    .back-button {
+     position: absolute; /* Para que el botón esté en la esquina */
+     bottom: 20px; /* Distancia del borde inferior */
+     right: 20px; /* Distancia del borde derecho */
+     width: 50px; /* Tamaño del botón */
+     height: 50px; /* Tamaño del botón */
+     border-radius: 50%; /* Botón circular */
+     background-color: #007bff; /* Color de fondo */
+     color: white; /* Color del icono */
+     border: none; /* Sin borde */
+     display: flex; /* Centrar icono */
+     align-items: center; /* Centrar icono verticalmente */
+     justify-content: center; /* Centrar icono horizontalmente */
+     font-size: 24px; /* Tamaño del icono */
+   }
+   .back-button:hover {
+     background-color: #0056b3; /* Color al pasar el mouse */
+   }
+  </style>
   </head>
   <body>
   <div class="container">
@@ -41,8 +63,9 @@
 
     </tbody>
     </table>
-
-
+    <a href="/turnos/principal" class="back-button">
+      <i class="fas fa-home"></i> <!-- Icono de casa -->
+    </a>
   </div>
   </body>
   </html>
