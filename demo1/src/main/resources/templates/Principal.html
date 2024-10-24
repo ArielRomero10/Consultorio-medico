@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Consultorio</title>
     <style>
         body {
@@ -27,6 +28,32 @@
         .card {
             margin-top: 20px;
         }
+
+        /* Estilo para los botones */
+.btn-obra {
+    background-color: #4CAF50; /* Verde para Con Obra Social */
+    color: white;
+}
+
+.btn-sin-obra {
+    background-color: #FF5733; /* Naranja para Sin Obra Social */
+    color: white;
+}
+
+/* Añadir margen entre el ícono y el texto */
+.btn i {
+    margin-right: 8px;
+}
+
+/* Efectos hover para ambos botones */
+.btn-obra:hover {
+    background-color: #45a049; /* Verde más oscuro al pasar el mouse */
+}
+
+.btn-sin-obra:hover {
+    background-color: #FF4500; /* Naranja más oscuro al pasar el mouse */
+}
+
     </style>
 </head>
 <body>
@@ -36,7 +63,18 @@
         <div class="card-header text-center"><h5>Generador de Reportes</h5></div>
         <div class="card-body">
             <p class="card-text">Genera y visualiza reportes de citas y turnos programados.</p>
-            <a href="#" class="btn btn-light">Ver Reportes</a>
+            <div class="mt-4">
+                <!-- Botón para descargar PDF con obra social -->
+                <a href="/turnos/pdf/con-obra-social" class="btn btn-obra btn-block">
+                    <i class="fas fa-file-pdf"></i> Generar PDF - Con Obra Social
+                </a>
+
+                <!-- Botón para descargar PDF sin obra social -->
+                <a href="/turnos/pdf/sin-obra-social" class="btn btn-sin-obra btn-block">
+                    <i class="fas fa-file-pdf"></i> Generar PDF - Sin Obra Social
+                </a>
+            </div>
+
         </div>
     </div>
     <div class="card text-white bg-success mb-3">
@@ -50,7 +88,7 @@
         <div class="card-header text-center"><h5>Lista de Turnos</h5></div>
         <div class="card-body">
             <p class="card-text">Consulta la lista de turnos programados.</p>
-            <a href="/turnos/listar" class="btn btn-light">Ver Lista de Turnos</a>
+            <a href="/turnos/listar" class="btn btn-light">Lista de turnos</a>
         </div>
     </div>
 </div>
